@@ -33,4 +33,6 @@ extension ImageService: TargetType {
     var validate: Bool {
         return true
     }
+
+    var parameterEncoding: ParameterEncoding { return URLEncoding.default }
 }

@@ -1,5 +1,6 @@
 import UIKit
 import Moya
+import RxSwift
 
 class ViewController: UIViewController {
 
@@ -9,41 +10,46 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var authorLabel: UILabel!
 
+    let disposeBag = DisposeBag()
+    let imageProvider = RxMoyaProvider<ImageService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    let quoteProvider = RxMoyaProvider<QuoteService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let imageProvider = MoyaProvider<ImageService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-        let quoteProvider = MoyaProvider<QuoteService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+        fetchAndDisplayRandomImage()
+        fetchAndDisplayRandomQuote()
+    }
 
-        imageProvider.request(.random) { result in
-            switch result {
-            case let .success(moyaResponse):
-                self.backgroundImage.image = try! moyaResponse.mapImage()
+    private func fetchAndDisplayRandomImage() {
+        imageProvider.request(.random)
+            .mapImage()
+            .subscribe(onNext: { image in
+                self.backgroundImage.image = image
                 self.backgroundImage.tintColor = UIColor.black
-            case let .failure(error):
-                print(error)
-            }
-        }
+            })
+            .addDisposableTo(disposeBag)
+    }
 
-        quoteProvider.request(.random) { result in
-            switch result {
-            case let .success(response):
-                let json = try! response.mapJSON() as? [String: String]
+    private func fetchAndDisplayRandomQuote() {
+        quoteProvider.request(.random)
+            .mapJSON()
+            .subscribe(onNext: { response in
+                if let json = response as? [String: String] {
+                    let quote = json["quoteText"]?.replacingOccurrences(of: "\\", with: "")
 
-                let quote = json?["quoteText"]
-
-                self.quoteLabel.text = "\"\(quote!.trimmingCharacters(in: .whitespaces))\""
-                if let author = json?["quoteAuthor"] {
-                    self.authorLabel.text = author
-                }
-                else {
+                    self.quoteLabel.text = "\"\(quote!.trimmingCharacters(in: .whitespaces))\""
+                    if let author = json["quoteAuthor"] {
+                        self.authorLabel.text = author
+                    }
+                    else {
+                        self.authorLabel.text = "Unknown"
+                    }
+                } else {
                     self.authorLabel.text = "Unknown"
                 }
-
-            case let .failure(error):
-                print(error)
-            }
-        }
+            })
+            .addDisposableTo(disposeBag)
     }
 
     override func didReceiveMemoryWarning() {
