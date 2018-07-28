@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,9 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b1q-DU-8Ha">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b1q-DU-8Ha">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" misplaced="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5BL-b3-HpO">
                                 <rect key="frame" x="41" y="120" width="293" height="148"/>
@@ -48,9 +47,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="b1q-DU-8Ha" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="08F-ul-agj"/>
+                            <constraint firstAttribute="trailing" secondItem="b1q-DU-8Ha" secondAttribute="trailing" id="4pR-54-sYK"/>
                             <constraint firstItem="5BL-b3-HpO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="Igy-wW-Rkk"/>
                             <constraint firstItem="Uls-PU-Jdm" firstAttribute="top" secondItem="5BL-b3-HpO" secondAttribute="bottom" constant="8" id="KDa-gr-L1X"/>
+                            <constraint firstItem="b1q-DU-8Ha" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="PUZ-zD-vfn"/>
                             <constraint firstItem="5BL-b3-HpO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="25" id="Pe7-1Y-YsJ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="b1q-DU-8Ha" secondAttribute="bottom" id="PfG-tf-iac"/>
                             <constraint firstItem="1eU-oe-F9k" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bFD-bj-yNo"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1eU-oe-F9k" secondAttribute="bottom" constant="75" id="fis-uA-xdM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Uls-PU-Jdm" secondAttribute="trailing" constant="26" id="h5U-Wa-TWT"/>
