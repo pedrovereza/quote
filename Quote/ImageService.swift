@@ -6,6 +6,8 @@ enum ImageService {
 }
 
 extension ImageService: TargetType {
+
+
     var baseURL: URL { return URL(string: "https://unsplash.it")! }
     var path : String {
         switch self {
@@ -18,21 +20,24 @@ extension ImageService: TargetType {
         return .get
     }
 
-    var parameters: [String: Any]? {
-        return ["random": true, "gravity" : "center"]
-    }
-
     var sampleData: Data {
         return "Something went wrong".data(using: .utf8)!
     }
 
     var task: Task {
-        return .request
+        return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
     }
 
     var validate: Bool {
         return true
     }
 
-    var parameterEncoding: ParameterEncoding { return URLEncoding.default }
+    var headers: [String : String]? {
+        return nil
+    }
+
+    private var parameters: [String: Any] {
+        return ["random": true, "gravity" : "center"]
+    }
+
 }

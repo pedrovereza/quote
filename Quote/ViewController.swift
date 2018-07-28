@@ -18,8 +18,8 @@ class ViewController: UIViewController {
     var author: Variable<String> = Variable("Unknown")
 
     let disposeBag = DisposeBag()
-    let imageProvider = RxMoyaProvider<ImageService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-    let quoteProvider = RxMoyaProvider<QuoteService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    let imageProvider = MoyaProvider<ImageService>()
+    let quoteProvider = MoyaProvider<QuoteService>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,19 +35,19 @@ class ViewController: UIViewController {
         image
             .asObservable()
             .bind(to: backgroundImage.rx.image)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func setupQuoteBinding() {
         quote
             .asObservable()
             .bind(to: quoteLabel.rx.text)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         author
             .asObservable()
             .bind(to: authorLabel.rx.text)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func refresh() {
@@ -56,35 +56,48 @@ class ViewController: UIViewController {
     }
 
     private func fetchRandomImage() {
-        imageProvider.request(.random)
+        imageProvider.rx.request(.random)
             .mapImage()
-            .subscribe(onNext: { image in
-                if let image = image {
-                    self.image.value = image
+            .subscribe({ event in
+                switch event {
+                case .success(let image):
+                    if let image = image {
+                        self.image.value = image
+                    }
+                    break
+
+                case .error(_):
+                    break
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func fetchRandomQuote() {
-        quoteProvider.request(.random)
+        quoteProvider.rx.request(.random)
             .mapJSON()
-            .subscribe(onNext: { response in
-                if let json = response as? [String: String] {
-                    let quote = json["quoteText"]?.replacingOccurrences(of: "\\", with: "")
+            .subscribe({ event in
+                switch event {
+                case .success(let response):
+                    if let json = response as? [String: String] {
+                        let quote = json["quoteText"]?.replacingOccurrences(of: "\\", with: "")
 
-                    self.quote.value = "\"\(quote!.trimmingCharacters(in: .whitespaces))\""
-                    if let author = json["quoteAuthor"] {
-                        self.author.value = author
-                    }
-                    else {
+                        self.quote.value = "\"\(quote!.trimmingCharacters(in: .whitespaces))\""
+                        if let author = json["quoteAuthor"] {
+                            self.author.value = author
+                        }
+                        else {
+                            self.author.value = "Unknown"
+                        }
+                    } else {
                         self.author.value = "Unknown"
                     }
-                } else {
-                    self.author.value = "Unknown"
+                    break
+                case .error(_):
+                    break
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 
     @IBAction func refreshContent(_ sender: Any) {
