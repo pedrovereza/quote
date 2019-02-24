@@ -15,6 +15,7 @@
 		471A91BB1E0F6DBD00656F6C /* QuoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A91BA1E0F6DBD00656F6C /* QuoteTests.swift */; };
 		4747936E1E0F73D200459C5D /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747936D1E0F73D200459C5D /* ImageService.swift */; };
 		47785BB61E1008BD006F0C32 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47785BB51E1008BD006F0C32 /* QuoteService.swift */; };
+		6FF5B05C2222E0C500144F8C /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5B05B2222E0C500144F8C /* Quote.swift */; };
 		79DBDACA8AB211FE27F0881C /* Pods_Quote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC6A38665F4F5711A1540FA /* Pods_Quote.framework */; };
 		FB8B8BC1E660BC663A19B39C /* Pods_QuoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A74070B56B90F41405BBBB /* Pods_QuoteTests.framework */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		4747936D1E0F73D200459C5D /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		47785BB51E1008BD006F0C32 /* QuoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
 		61ED87C50F834E63AE542A1D /* Pods-Quote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quote.release.xcconfig"; path = "Pods/Target Support Files/Pods-Quote/Pods-Quote.release.xcconfig"; sourceTree = "<group>"; };
+		6FF5B05B2222E0C500144F8C /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		75A74070B56B90F41405BBBB /* Pods_QuoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7785B71BF047C911CCC95A2E /* Pods-QuoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuoteTests/Pods-QuoteTests.release.xcconfig"; sourceTree = "<group>"; };
 		A0FB8A04212392FCFFED9022 /* Pods-QuoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuoteTests/Pods-QuoteTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		471A91A41E0F6DBD00656F6C /* Quote */ = {
 			isa = PBXGroup;
 			children = (
+				6FF5B05A2222E0AC00144F8C /* Models */,
 				471A91A51E0F6DBD00656F6C /* AppDelegate.swift */,
 				471A91A71E0F6DBD00656F6C /* ViewController.swift */,
 				471A91A91E0F6DBD00656F6C /* Main.storyboard */,
@@ -123,6 +126,14 @@
 				7785B71BF047C911CCC95A2E /* Pods-QuoteTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6FF5B05A2222E0AC00144F8C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6FF5B05B2222E0C500144F8C /* Quote.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		9A5AC0CF98D9BC9E585E6E65 /* Frameworks */ = {
@@ -311,6 +322,7 @@
 				47785BB61E1008BD006F0C32 /* QuoteService.swift in Sources */,
 				471A91A81E0F6DBD00656F6C /* ViewController.swift in Sources */,
 				471A91A61E0F6DBD00656F6C /* AppDelegate.swift in Sources */,
+				6FF5B05C2222E0C500144F8C /* Quote.swift in Sources */,
 				4747936E1E0F73D200459C5D /* ImageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

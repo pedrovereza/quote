@@ -6,11 +6,8 @@ enum QuoteService {
 }
 
 extension QuoteService: TargetType {
-    var headers: [String : String]? {
-        return nil
-    }
-
     var baseURL: URL { return URL(string: "http://api.forismatic.com")! }
+    
     var path : String {
         switch self {
         case .random:
@@ -34,10 +31,13 @@ extension QuoteService: TargetType {
         return true
     }
 
+    var headers: [String : String]? {
+        return nil
+    }
+
     private var parameters: [String: Any] {
         return ["method": "getQuote",
                 "format": "json",
-                "lang": "en"
-        ]
+                "lang": "en"]
     }
 }

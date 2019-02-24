@@ -6,9 +6,8 @@ enum ImageService {
 }
 
 extension ImageService: TargetType {
-
-
     var baseURL: URL { return URL(string: "https://unsplash.it")! }
+
     var path : String {
         switch self {
         case .random:
@@ -39,5 +38,4 @@ extension ImageService: TargetType {
     private var parameters: [String: Any] {
         return ["random": true, "gravity" : "center"]
     }
-
 }

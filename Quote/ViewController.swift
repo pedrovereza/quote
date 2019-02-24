@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
     let disposeBag = DisposeBag()
     let imageProvider = MoyaProvider<ImageService>()
-    let quoteProvider = MoyaProvider<QuoteService>()
+    let quoteProvider = MoyaProvider<QuoteService>(plugins: [NetworkLoggerPlugin()])
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,20 +75,13 @@ class ViewController: UIViewController {
 
     private func fetchRandomQuote() {
         quoteProvider.rx.request(.random)
-            .mapJSON()
+            .map(Quote.self)
             .subscribe({ event in
                 switch event {
-                case .success(let response):
-                    if let json = response as? [String: String] {
-                        let quote = json["quoteText"]?.replacingOccurrences(of: "\\", with: "")
-
-                        self.quote.value = "\"\(quote!.trimmingCharacters(in: .whitespaces))\""
-                        if let author = json["quoteAuthor"] {
-                            self.author.value = author
-                        }
-                        else {
-                            self.author.value = "Unknown"
-                        }
+                case .success(let quote):
+                    if !quote.author.isEmpty {
+                        self.quote.value = quote.message.trimmingCharacters(in: .whitespaces)
+                        self.author.value = quote.author
                     } else {
                         self.author.value = "Unknown"
                     }
